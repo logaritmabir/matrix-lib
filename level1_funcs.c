@@ -13,3 +13,12 @@ void saxpy(const float alpha, const int arr_length, const void* restrict xv, con
         dst[i] = x[i] * alpha + y[i];
     }
 }
+
+void daxpy(const float alpha, const int arr_length, const void* restrict xv, const void* restrict yv, void* restrict dstv){
+    const double* x = (double*)xv;
+    const double* y = (double*)yv;
+    double* dst = (double*)dstv;
+    for(int i = 0; i < arr_length; i++){
+        dst[i] = x[i] * alpha + y[i];
+    }
+}
