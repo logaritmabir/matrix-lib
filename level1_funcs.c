@@ -5,7 +5,7 @@ int add(int n1, int n2){
     long res = n1 + n2;
     return res;
 }
-void axpy(const float alpha, const int arr_length, const void* restrict xv, const void* restrict yv, void* restrict dstv){
+void saxpy(const float alpha, const int arr_length, const void* restrict xv, const void* restrict yv, void* restrict dstv){
     const float* x = (float*)xv;
     const float* y = (float*)yv;
     float* dst = (float*)dstv;

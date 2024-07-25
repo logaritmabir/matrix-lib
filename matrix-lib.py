@@ -5,7 +5,7 @@ import pyblas.level1 as pb1
 import scipy
 import scipy.linalg
 
-def axpy(alpha, x, y):
+def saxpy(alpha, x, y):
     """
     Perform the operation dst = alpha * x + y.
 
@@ -36,21 +36,21 @@ def main():
     matrix_lib.add.argtypes = (ctypes.c_int, ctypes.c_int)
     matrix_lib.add.restype = ctypes.c_long
 
-    matrix_lib.axpy.argtypes = (ctypes.c_float, ctypes.c_int, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p)
-    matrix_lib.axpy.restype = None
+    matrix_lib.saxpy.argtypes = (ctypes.c_float, ctypes.c_int, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p)
+    matrix_lib.saxpy.restype = None
 
     x = np.random.rand(1200000)
     y = np.random.rand(1200000)
     dst = np.zeros(len(y),dtype=np.float32)
 
     start = time.time()
-    matrix_lib.axpy(1, len(dst), x.ctypes.data, y.ctypes.data, dst.ctypes.data)
+    matrix_lib.saxpy(1, len(dst), x.ctypes.data, y.ctypes.data, dst.ctypes.data)
     end = time.time()
 
     print("Calling C Func : " + f"{end-start}")
 
     start = time.time()
-    axpy(1, x, y)
+    saxpy(1, x, y)
     end = time.time()
 
     print("Calling Python Func : " +f"{end-start}")
